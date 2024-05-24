@@ -1,3 +1,5 @@
+// Bruno Vázquez Espinoza - A00838521
+
 // Incluir librerías
 #include <iostream>
 using namespace std;
