@@ -72,10 +72,14 @@ public:
 };
 
 // Implementación de los métodos de la clase Video
-Video::Video() : id(0), nombre("Desconocido"), duracion(0), genero("Desconocido"), numCalificaciones(0) {}
+Video::Video() : id(0), nombre("Desconocido"), duracion(0), genero("Desconocido"), numCalificaciones(0) {
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+}
 
 Video::Video(int _id, const string& _nombre, int _duracion, const string& _genero)
-    : id(_id), nombre(_nombre), duracion(_duracion), genero(_genero), numCalificaciones(0) {}
+    : id(_id), nombre(_nombre), duracion(_duracion), genero(_genero), numCalificaciones(0) {
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+}
 
 void Video::mostrar() const {
     cout << "ID: " << id << ", Nombre: " << nombre << ", Duracion: " << duracion << " min, Genero: " << genero;
@@ -117,10 +121,17 @@ string Video::getNombre() const {
 }
 
 // Implementación de los métodos de la clase Pelicula
-Pelicula::Pelicula() : Video() {}
+Pelicula::Pelicula() : Video() {
+    genero = "Desconocido";
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+    numCalificaciones = 0;
+}
 
 Pelicula::Pelicula(int id, const string& nombre, int duracion, const string& genero)
-    : Video(id, nombre, duracion, genero) {}
+    : Video(id, nombre, duracion, genero) {
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+    numCalificaciones = 0;
+}
 
 void Pelicula::mostrar() const {
     cout << "Pelicula - ";
@@ -128,9 +139,13 @@ void Pelicula::mostrar() const {
 }
 
 // Implementación de los métodos de la clase Episodio
-Episodio::Episodio() : titulo("Desconocido"), temporada(0), numCalificaciones(0) {}
+Episodio::Episodio() : titulo("Desconocido"), temporada(0), numCalificaciones(0) {
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+}
 
-Episodio::Episodio(const string& _titulo, int _temporada) : titulo(_titulo), temporada(_temporada), numCalificaciones(0) {}
+Episodio::Episodio(const string& _titulo, int _temporada) : titulo(_titulo), temporada(_temporada), numCalificaciones(0) {
+    for (int i = 0; i < MAX_CALIFICACIONES; ++i) calificaciones[i] = 0;
+}
 
 void Episodio::mostrar() const {
     cout << "Titulo: " << titulo << ", Temporada: " << temporada;
@@ -175,7 +190,9 @@ double Episodio::getCalificacionPromedio() const {
 Serie::Serie() : Video(), numEpisodios(0) {}
 
 Serie::Serie(int id, const string& nombre, int duracion, const string& genero)
-    : Video(id, nombre, duracion, genero), numEpisodios(0) {}
+    : Video(id, nombre, duracion, genero), numEpisodios(0) {
+    for (int i = 0; i < MAX_EPISODIOS; ++i) episodios[i] = Episodio();
+}
 
 void Serie::agregarEpisodio(const Episodio& episodio) {
     if (numEpisodios < MAX_EPISODIOS) {
